@@ -1,7 +1,7 @@
 import { useState } from "react";
-import "./style.css";
 
-const Modal = ({active, setActive}) => {
+
+const Modal = ({active, setActive, setUser}) => {
 	const [auth, setAuth] = useState(true);
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -67,14 +67,21 @@ const Modal = ({active, setActive}) => {
 				let dataLog = await resLog.json()
 				if (!dataLog.err) {
 					localStorage.setItem("rockUser", dataLog.data.name);
+					localStorage.setItem("rockToken", dataLog.token);
+					localStorage.setItem("rockId", dataLog.data._id);
 					clearForm();
 					setActive(false);
+					setUser(dataLog.data.name);
 				}
 			} else {
 				if (!data.err) {
-					localStorage.setItem("rockUser", data.data.name)
+					console.log(data);
+					localStorage.setItem("rockUser", data.data.name);
+					localStorage.setItem("rockToken", data.token);
+					localStorage.setItem("rockId", data.data._id);
 					clearForm();
 					setActive(false);
+					setUser(data.data.name);
 				}
 			}
 
@@ -82,64 +89,70 @@ const Modal = ({active, setActive}) => {
 		
 	}
 	return <div 
-		className="modal-wrapper"
+		className="modal"
 		style={{display: active ? "flex" : "none"}}
 	>
-		<div className="modal">
-			<button onClick={() => setActive(false)}>Закрыть окно</button>
-			<h3>Авторизация</h3>
-			<form onSubmit={sendForm}>
-				{!auth && <label>
-					Имя пользователя
-					<input 
-						type="text" 
-						value={name} 
-						onChange={(e) => setName(e.target.value)}
-					/>
-				</label>}
-				<label>
-					Электронный адрес
-					<input 
-						type="email" 
-						value={email} 
-						onChange={(e) => setEmail(e.target.value)}
-					/>
-				</label>
-				<label>
-					Пароль
-					<input 
-						type="password" 
-						value={pwd} 
-						onChange={(e) => setPwd(e.target.value)}
-					/>
-				</label>
-				{!auth && <label>
-					Повторить пароль
-					<input 
-						type="password" 
-						value={testPwd} 
-						onChange={(e) => setTestPwd(e.target.value)}
-						style={testAccess}
-						// style={{border: "1px solid", backgroundColor: "blueviolet"}}
-					/>
-				</label>}
-				<div className="modal-ctl">
-					<button 
-						className="modal-btn"
-						// Если кнопка формы регистрации, то проверяем наличие соответствия паролей, но они не должы быть пустыми
-						disabled={!auth && (!pwd || pwd !== testPwd)}
-					>
-						{auth ? "Войти" : "Создать аккаунт" }
-					</button>
-					<a 
-						href=""
-						className="modal-link"
-						onClick={switchAuth}
-					>
-						{auth ? "Регистрация" : "Войти"}
-					</a>
+		<div className="modal-dialog modal-dialog-centered" role="document">
+			<div className="modal-content rounded-4 shadow">
+				<div className="modal-header p-4 pb-4 border-bottom-0">
+					<h3 className="fw-bold mb-0 fs-4">Авторизация</h3>
+					<button onClick={() => setActive(false)} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-			</form>
+
+				<div className="modal-body p-4 pt-0">
+					<form onSubmit={sendForm} className="mb-3">
+						{!auth && <div className="form-floating mb-3">
+							<input
+								type="email" 
+								className="form-control rounded-4" 
+								id="floatingInput" 
+								placeholder="Name"
+								value={name} 
+								onChange={(e) => setName(e.target.value)}
+							/>
+							<label for="floatingInput">Email</label>
+						</div>}
+						<div className="form-floating mb-3">
+							<input
+								type="email" 
+								className="form-control rounded-4" 
+								id="floatingInput" 
+								placeholder="name@example.com"
+								value={email} 
+								onChange={(e) => setEmail(e.target.value)}
+							/>
+							<label for="floatingInput">Email</label>
+						</div>
+						<div className="form-floating mb-3">
+							<input 
+								type="password" 
+								className="form-control rounded-4" 
+								id="floatingPassword" 
+								placeholder="Password"
+								value={pwd} 
+								onChange={(e) => setPwd(e.target.value)}
+							/>
+							<label for="floatingPassword">Password</label>
+						</div>
+						{!auth && <div className="form-floating mb-3">
+							<input 
+								type="password" 
+								className="form-control rounded-4" 
+								id="floatingPassword" 
+								placeholder="Повторить Password"
+								value={testPwd} 
+								onChange={(e) => setTestPwd(e.target.value)}
+							/>
+							<label for="floatingPassword">Password</label>
+						</div>}
+
+					</form>
+					<form onSubmit={sendForm} className="">
+						<button className="w-100 mb-2 btn btn-lg rounded-5 btn-warning" type="submit" disabled={!auth && (!pwd || pwd !== testPwd)}>{auth ? "Войти" : "Создать аккаунт" }</button>
+						<button className="w-100 mb-2 btn btn-lg rounded-5 btn-warning" type="submit" onClick={switchAuth}>{auth ? "Регистрация" : "Войти"}</button>
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
 }

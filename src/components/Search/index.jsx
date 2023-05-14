@@ -1,5 +1,5 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import { Container } from 'react-bootstrap';
 import "./style.css";
 
 // arr - список товаров из json-файла
@@ -13,6 +13,16 @@ const Search = ({arr, upd}) => {
 		Единственный аргумент useState - значение по умолчанию
 	*/
 	const [count, updateCount] = useState(0);
+	useEffect(() => {
+		if (text) {
+			let result = arr.filter(el => new RegExp(text, "i").test(el.name))
+			upd(result);
+			setQuantity(result.length);
+		} else {
+			upd(arr);
+			setQuantity(arr.length)
+		}
+	}, [arr]);
 	let n = 1;
 	const click = () => {
 		// console.log(n++);
@@ -34,17 +44,19 @@ const Search = ({arr, upd}) => {
 	}
 
 	return (
-		<div className="search-block">
-			<input type="search" size="70" value={text} onChange={searchByText}/>
-			{/*<input 
-				type="search" 
-				value={text} 
-				onChange={(e) => setText(e.target.value)}/>*/}
-			<button className="card__btn" onClick={click}>Поиск</button>
-			<hr/>
-			{/*<div>{text}, {n}, {count}</div>*/}
-			<div>По вашему запросу « {text} » найдено {quantity} подходящих товаров</div>
-		</div>
+		<Container>
+			<div className="search-block my-4">
+				<input type="search" value={text} onChange={searchByText}/>
+				{/*<input 
+					type="search" 
+					value={text} 
+					onChange={(e) => setText(e.target.value)}/>*/}
+				<button onClick={click}>Кнопочка</button>
+				<hr/>
+				{/*<div>{text}, {n}, {count}</div>*/}
+				<div>По вашему запросу « {text} » найдено {quantity} подходящих товаров</div>
+			</div>
+		</Container>
 	)
 }
 
@@ -85,15 +97,3 @@ export default Search;
 			componentWillUpdate
 			componentDidUpdate
 */
-
-
-
-
-
-
-
-
-
-
-
-
