@@ -89,7 +89,7 @@ const Modal = ({active, setActive, setUser}) => {
 		
 	}
 	return <div 
-		className="modal"
+		className="modal" size="lg"
 		style={{display: active ? "flex" : "none"}}
 	>
 		<div className="modal-dialog modal-dialog-centered" role="document">

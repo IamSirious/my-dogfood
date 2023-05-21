@@ -1,13 +1,14 @@
 import Logo from "./Logo";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Badge, Button, Container } from 'react-bootstrap';
 import { 
-    Folder, 
-    Star, 
-    Cart4, 
-    Person, 
-    BoxArrowInRight
+	Heart,
+	Person,
+	Bag,
+	BoxArrowInRight
 } from "react-bootstrap-icons";
+import profile from "../../assets/images/profile1.svg";
 
 const Header = ({user, setModalActive, serverGoods}) => {
     const [likeCnt, setLikeCnt] = useState(0);
@@ -39,24 +40,25 @@ const Header = ({user, setModalActive, serverGoods}) => {
 				<div className="col-md-2 text-end">
 					<div className="collapse navbar-collapse">
 						{user && <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-							<li className="nav-item">
-									<Link to="/catalog" className="nav-link active" title="Каталог"><Folder size="24"/></Link>
-								</li>
 								<li className="nav-item">
 									<Link to="/favorites" className="nav-link" title="Избранное">
-										<Star size="24"/>
-										<span className="badge-item">{likeCnt}</span>
+										<Heart size="24"/>
+											<span className="position-relative top-0 start-0 translate-middle badge text-bg-success rounded">
+												{likeCnt}
+											</span>
 									</Link>
 								</li>
 								<li className="nav-item">
 									<Link to="/" className="nav-link" title="Корзина">
-										<Cart4 size="24"/>
-										<span className="badge-item">{cartCnt}</span>
+										<Bag size="24"/>
+										<span className="position-relative top-0 start-0 translate-middle badge text-bg-success rounded">
+											{cartCnt}
+										</span>
 									</Link>
 								</li>
 								<li className="nav-item">
-									<Link to="/profile" className="nav-link" title="Корзина">
-										<Person size="24"/>
+									<Link to="/profile" className="nav-link" title="Войти">
+										<img src={profile} class="" alt="profile"/>
 									</Link>
 								</li>
 						</ul>}

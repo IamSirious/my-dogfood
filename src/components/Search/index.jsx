@@ -1,9 +1,13 @@
-import { useState, useEffect } from "react";
-import { Container } from 'react-bootstrap';
+import { useState, useEffect, useContext } from "react";
+import Ctx from "../../context";
 import "./style.css";
 
+import { Container, Button, Form, InputGroup } from 'react-bootstrap';
+import { SearchHeart } from "react-bootstrap-icons";
+
 // arr - список товаров из json-файла
-const Search = ({arr, upd}) => {
+const Search = ({arr}) => {
+	const {setGoods} = useContext(Ctx);
 	// let text = "Corn";
 	const [text, setText] = useState("");
 	const [quantity, setQuantity] = useState(arr.length);
@@ -16,10 +20,10 @@ const Search = ({arr, upd}) => {
 	useEffect(() => {
 		if (text) {
 			let result = arr.filter(el => new RegExp(text, "i").test(el.name))
-			upd(result);
+			setGoods(result);
 			setQuantity(result.length);
 		} else {
-			upd(arr);
+			setGoods(arr);
 			setQuantity(arr.length)
 		}
 	}, [arr]);
@@ -38,29 +42,33 @@ const Search = ({arr, upd}) => {
 		setText(val);
 		// let result = arr.filter(el => el.name.toLowerCase().includes(val.toLowerCase()));
 		let result = arr.filter(el => new RegExp(val, "i").test(el.name))
-		upd(result);
+		setGoods(result);
 		setQuantity(result.length);
 		console.log(result);
 	}
 
 	return (
-		<Container>
-			<div className="search-block my-4">
-				<input type="search" value={text} onChange={searchByText}/>
-				{/*<input 
-					type="search" 
-					value={text} 
-					onChange={(e) => setText(e.target.value)}/>*/}
-				<button onClick={click}>Кнопочка</button>
-				<hr/>
-				{/*<div>{text}, {n}, {count}</div>*/}
-				<div>По вашему запросу « {text} » найдено {quantity} подходящих товаров</div>
-			</div>
+		<Container className="py-3">
+			<InputGroup className="mb-3">
+				<Form.Control className="border-warning"
+					placeholder="Search"
+					aria-label="search"
+					aria-describedby="basic-addon2"
+					value={text}
+					onChange={searchByText}
+				/>
+				<Button variant="outline-warning" id="button-addon2" onClick={click}>
+					<SearchHeart/>
+				</Button>
+			</InputGroup>
+			<div>По вашему запросу « {text} » найдено {quantity} подходящих товаров</div>
 		</Container>
 	)
 }
 
 export default Search;
+
+
 
 
 // Search => 

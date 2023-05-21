@@ -1,7 +1,7 @@
 .full-banner {
     color: #fff;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     overflow: hidden;
 }
 .full-banner__block {
@@ -56,8 +56,15 @@
 		background-position: bottom right -80px;
 		background-size: 400px auto;
 	}
+	.full-banner__title {
+		font-size: 21px;
+		line-height: 23px;
+		max-width: 180px;
+		margin-bottom: 11px;
+	}
 	.full-banner__descr {
 		font-size: 12px;
 		line-height: 15px;
 	}
 }
+
