@@ -6,12 +6,16 @@ import { ChevronLeft } from "react-bootstrap-icons";
 const Favorites = ({goods, userId, setServerGoods}) => {
     return <Container>
 		<Link class="button__link text-decoration-none" to="/catalog"><ChevronLeft/>&nbsp;Каталог</Link>
-        {goods.filter(el => el.likes.includes(userId)).map(g => <Card 
-            {...g} 
-            key={g._id}
-            img={g.pictures}
-            setServerGoods={setServerGoods}
-        />)}
+		<div className="album py-3">
+			<div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+				{goods.filter(el => el.likes.includes(userId)).map(g => <Card 
+					{...g} 
+					key={g._id}
+					img={g.pictures}
+					setServerGoods={setServerGoods}
+				/>)}
+			</div>
+		</div>
     </Container>
 }
 

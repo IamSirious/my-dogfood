@@ -1,8 +1,14 @@
-import Card from "../components/Card"
-import { useState } from "react";
+import { useState, useContext } from "react";
+import Card from "../components/Card";
+import Pagination from "../components/Pagination";
+import usePagination from "../hooks/usePagination";
+import Ctx from "../context";
+
 import { Button, Container } from 'react-bootstrap';
 
-const Catalog = ({goods, setServerGoods}) => {
+const Catalog = ({setServerGoods}) => {
+    const {goods} = useContext(Ctx)
+    const paginate = usePagination(goods, 20)
     const [sort, setSort] = useState(null)
     const filterSt = {
         gridColumnEnd: "span 4",
@@ -21,7 +27,9 @@ const Catalog = ({goods, setServerGoods}) => {
             })
         }
     }
+
     return <Container>
+		<div className="mb-3" style={{gridColumnEnd: "span 4"}}><Pagination hk={paginate} /></div>
         <div style={filterSt}>
             {/* Сортировка по числу price*/}
             <Button variant="warning"
@@ -42,12 +50,17 @@ const Catalog = ({goods, setServerGoods}) => {
                 onClick={() => sortHandler("discount")}
             >Скидки</Button>{' '}
         </div>
-        {goods.map(g => <Card 
-            key={g._id} 
-            {...g} 
-            img={g.pictures} 
-            setServerGoods={setServerGoods}
-        />)}   
+		<div className="album py-3">
+			<div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+				{goods.map(g => <Card 
+					key={g._id} 
+					{...g} 
+					img={g.pictures} 
+					setServerGoods={setServerGoods}
+				/>)}
+			</div>
+		</div>
+		<div style={{gridColumnEnd: "span 4"}}><Pagination hk={paginate} /></div>
     </Container>
 }
 

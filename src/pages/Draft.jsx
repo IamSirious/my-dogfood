@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Container } from 'react-bootstrap';
 import Search from "../components/Search";
 import Card from "../components/Card";
 import Promo from "../components/Promo/Promo";
@@ -24,7 +25,7 @@ while(n--) {
 const Draft = () => {
     const [goods, setGoods] = useState(cardsData);
     return (
-        <div className="container">
+        <Container>
             <Search arr={cardsData} upd={setGoods}/>
             {goods.map((el, i) => <Card
                 key={i}
@@ -33,7 +34,7 @@ const Draft = () => {
                 price={el.price}
             />)}
             {adds.map((el,i) => <Promo key={i} {...el} type={el.sizes}/>)}
-        </div>
+        </Container>
     )
 }
 
