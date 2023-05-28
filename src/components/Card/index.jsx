@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Button, Container } from 'react-bootstrap';
 import { Heart, HeartFill, Percent } from "react-bootstrap-icons"
 
-import { discountPrice } from "../Utils/Utils";
+import { discountPrice } from "../../utils/Utils";
 
 // {img, name, price} => props (props.img, props.name, props.price)
 const Card = ({

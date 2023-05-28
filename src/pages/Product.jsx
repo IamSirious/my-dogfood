@@ -1,20 +1,22 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import "./Product.css";
-import { Accordion, ButtonGroup, Button, Container, Row, Col, Figure, Table } from 'react-bootstrap';
+import { Accordion, ButtonGroup, Button, Container, InputGroup, Form, Row, Col, Figure, Table } from 'react-bootstrap';
 import { ChevronLeft, Star, Heart, HeartFill, Plus, Dash } from "react-bootstrap-icons";
 import Loader from "../components/Loader";
 
 import delivery from "./../assets/images/delivery.svg";
 import guarantee from "./../assets/images/guarantee.svg";
 import BannerOne from "../components/Banners/BannerOne";
+import Breadcrumb from "../components/Breadcrumb";
 
-import { isLiked } from './../utils/Utils'
+import { isLiked, discountPrice } from '../utils/Utils';
 
-const Product = ({_id, onProductLike, description, discount, price, name, pictures, likes, reviews, wight, stock, rating }) => {
+const Product = ({_id, onProductLike, description, discount, price, name, pictures, likes, reviews, wight, stock }) => {
     const [product, setProduct] = useState({});
     const {id} = useParams();
 	const [cnt, setCnt] = useState(0);
+	const discount__price = discountPrice(price, discount);
 
     useEffect(() => {
         fetch(`https://api.react-learning.ru/products/${id}`, {
@@ -38,7 +40,9 @@ const Product = ({_id, onProductLike, description, discount, price, name, pictur
     */
 	return <>
 		<Container>
-			<Link className="button__link text-decoration-none" to="/catalog"><ChevronLeft/>&nbsp;Каталог</Link>
+			<div className="pt-3">
+				<Breadcrumb/>
+			</div>
 			<div className="my-4">
 				<div className="heading-section">
 					<h1>{product.name}</h1>
@@ -50,6 +54,7 @@ const Product = ({_id, onProductLike, description, discount, price, name, pictur
 						<Star type="radio" id="star3" name="rate" defaultValue={3} defaultChecked />&nbsp;
 						<Star type="radio" id="star2" name="rate" defaultValue={2} />&nbsp;
 						<Star type="radio" id="star1" name="rate" defaultValue={1} />&nbsp;
+						<span className="">{product.rating}</span>
 					</div>
 				<div className="row">
 					<div className="col-md-6 my-4">
@@ -76,33 +81,31 @@ const Product = ({_id, onProductLike, description, discount, price, name, pictur
 									<Button className="rounded-pill" size="lg" variant="warning">&nbsp;&nbsp;&nbsp;В корзину&nbsp;&nbsp;&nbsp;</Button>{' '}
 								</div>
 							</div>
-							<div className="row my-3">
-								<span>{isLiked ? <HeartFill size="20"/> : <Heart size="20"/>}</span>
-							</div>
+							<div className="row my-3">	</div>
 						</div>
-						<div class="card bg-light mb-3 border-0 rounded-4" style={{maxWidth: "400px"}}>
-						  <div class="row g-0">
-							<div class="col-md-1">
-							  <img src={delivery} class="rounded-start mt-3 ms-2" alt="delivery"/>
+						<div className="card bg-light mb-3 border-0 rounded-4" style={{maxWidth: "400px"}}>
+						  <div className="row g-0">
+							<div className="col-md-1">
+							  <img src={delivery} className="rounded-start mt-3 ms-2" alt="delivery"/>
 							</div>
-							<div class="col-md-11">
-							  <div class="card-body">
-								<h5 class="card-title ms-2">Доставка по всему Миру!</h5>
-								<p class="card-text ms-2 mb-2">Доставка курьером — от 399 ₽</p>
-								<p class="card-text ms-2">Доставка в пункт выдачи — от 199 ₽</p>
+							<div className="col-md-11">
+							  <div className="card-body">
+								<h5 className="card-title ms-2">Доставка по всему Миру!</h5>
+								<p className="card-text ms-2 mb-2">Доставка курьером — от 399 ₽</p>
+								<p className="card-text ms-2">Доставка в пункт выдачи — от 199 ₽</p>
 							  </div>
 							</div>
 						  </div>
 						</div>
-						<div class="card bg-light mb-3 border-0 rounded-4" style={{maxWidth: "400px"}}>
-						  <div class="row g-0">
-							<div class="col-md-1">
-							  <img src={guarantee} class="rounded-start mt-3 ms-2" alt="guarantee"/>
+						<div className="card bg-light mb-3 border-0 rounded-4" style={{maxWidth: "400px"}}>
+						  <div className="row g-0">
+							<div className="col-md-1">
+							  <img src={guarantee} className="rounded-start mt-3 ms-2" alt="guarantee"/>
 							</div>
-							<div class="col-md-11">
-							  <div class="card-body">
-								<h5 class="card-title ms-2">Гарантия качества</h5>
-								<p class="card-text ms-2 lh-sm">Если Вам не понравилось качество нашей продукции, мы вернем деньги, либо сделаем все возможное, чтобы удовлетворить ваши нужды.</p>
+							<div className="col-md-11">
+							  <div className="card-body">
+								<h5 className="card-title ms-2">Гарантия качества</h5>
+								<p className="card-text ms-2 lh-sm">Если Вам не понравилось качество нашей продукции, мы вернем деньги, либо сделаем все возможное, чтобы удовлетворить ваши нужды.</p>
 							  </div>
 							</div>
 						  </div>
@@ -147,6 +150,14 @@ const Product = ({_id, onProductLike, description, discount, price, name, pictur
 						</Accordion.Body>
 					</Accordion.Item>
 				</Accordion>
+				<div class="py-3">
+					<h4 class="title py-2">Отзывы</h4>
+					<Button href="/rewiew/${_id}" size="lg" variant="outline-warning rounded-pill text-dark" id="rewiew">Написать отзыв</Button>
+				</div>
+				<div class="py-3">
+					<h4 class="title py-2">Остальные отзывы</h4>
+					<span className=""></span>
+				</div>
 			</div>
 		</Container>
 		<BannerOne />
@@ -154,18 +165,3 @@ const Product = ({_id, onProductLike, description, discount, price, name, pictur
 }
 
 export default Product;
-
-
-/* 							<form class="row g-3 mb-3 product-count">
-								<div class="col-auto">
-									<label for="inputQuantity" class="visually-hidden">Quantity</label>
-									<form action="#" className="d-flex flex-row group">
-										<div className="qtyminus">-</div>
-											<input type="text" name="quantity" defaultValue={1} className="qty" placeholder="quantity"/>
-										<div className="qtyplus">+</div>
-									</form>
-								</div>
-								<div class="col-auto">
-									<Button variant="warning" className="rounded-pill mb-2 px-3">В корзину</Button>{' '}
-								</div>
-							</form> */

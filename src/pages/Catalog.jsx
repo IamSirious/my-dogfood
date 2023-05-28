@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Card from "../components/Card";
 import Pagination from "../components/Pagination";
 import usePagination from "../hooks/usePagination";
@@ -7,7 +7,7 @@ import Ctx from "../context";
 import { Button, Container } from 'react-bootstrap';
 
 const Catalog = ({setServerGoods}) => {
-    const {goods} = useContext(Ctx)
+    const {goods, text} = useContext(Ctx)
     const paginate = usePagination(goods, 20)
     const [sort, setSort] = useState(null)
     const filterSt = {
@@ -15,6 +15,11 @@ const Catalog = ({setServerGoods}) => {
         display: "flex",
         gap: "20px"
     }
+
+    useEffect(() => {
+        paginate.step(1);
+    }, [text])
+
     const sortHandler = (vector) => {
         if (vector === sort) {
             setSort(null)
@@ -52,7 +57,7 @@ const Catalog = ({setServerGoods}) => {
         </div>
 		<div className="album py-3">
 			<div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
-				{goods.map(g => <Card 
+				{paginate.setDataPerPage().map(g => <Card 
 					key={g._id} 
 					{...g} 
 					img={g.pictures} 
@@ -60,7 +65,6 @@ const Catalog = ({setServerGoods}) => {
 				/>)}
 			</div>
 		</div>
-		<div style={{gridColumnEnd: "span 4"}}><Pagination hk={paginate} /></div>
     </Container>
 }
 

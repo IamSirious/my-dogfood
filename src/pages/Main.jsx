@@ -11,9 +11,7 @@ import { Container } from 'react-bootstrap';
 export default ({ data }) => {
     return <>
 		<Hero/>
-        <Container>
-			<h1>Главная страница</h1>
-		</Container>
+
         <Ads />
 		
 		<BannerOne />

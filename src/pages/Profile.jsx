@@ -1,10 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
 import { Button, Card, Container, Row, Col, Figure } from 'react-bootstrap';
 import { BoxArrowLeft } from "react-bootstrap-icons";
 
-const Profile = ({ user, color, setUser }) => {
+import Breadcrumb from "../components/Breadcrumb";
+
+const Profile = ({ user, avatar, color, setUser }) => {
     const navigate = useNavigate();
 
     const captionStyle = {
@@ -23,7 +24,8 @@ const Profile = ({ user, color, setUser }) => {
     }
 
 	return (
-		<Container>
+		<Container className="mt-3">
+			<Breadcrumb/>
 			<Card className="my-4 border-0">
 				<Card.Header as="h5">Профиль</Card.Header>
 				<Card.Body>

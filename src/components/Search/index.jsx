@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import Ctx from "../../context";
 import "./style.css";
 
-import { Container, Button, Form, InputGroup } from 'react-bootstrap';
+import { Container, Button, Form, InputGroup, Col, Row } from 'react-bootstrap';
 import { SearchHeart } from "react-bootstrap-icons";
 
 // arr - список товаров из json-файла
@@ -49,26 +49,23 @@ const Search = ({arr}) => {
 
 	return (
 		<Container className="py-3">
-			<InputGroup className="mb-3">
-				<Form.Control className="border-warning"
-					placeholder="Search"
-					aria-label="search"
-					aria-describedby="basic-addon2"
-					value={text}
-					onChange={searchByText}
-				/>
-				<Button variant="outline-warning" id="button-addon2" onClick={click}>
-					<SearchHeart/>
-				</Button>
+			<InputGroup className="py-0">
+				<Col>
+					<Form.Control className="border-warning rounded-pill"
+						size="lg"
+						placeholder="Поиск"
+						aria-label="поиск"
+						value={text}
+						onChange={searchByText}
+					/>
+				</Col>
 			</InputGroup>
-			<div>По вашему запросу « {text} » найдено {quantity} подходящих товаров</div>
+			<p className="mt-2 mb-0 text-center text-muted"><small>По вашему запросу « {text} » найдено {quantity} подходящих товаров</small></p>
 		</Container>
 	)
 }
 
 export default Search;
-
-
 
 
 // Search => 
@@ -81,8 +78,6 @@ export default Search;
 // 	div2
 // 	div.append(input, button, div2)
 
-
-
 /*
 	<div onclick="foo()"></div>
 	div.onclick = function() {}
@@ -90,7 +85,6 @@ export default Search;
 
 	<div onClick={foo}>
 */
-
 
 /*
 	Жизненный цикл компонента

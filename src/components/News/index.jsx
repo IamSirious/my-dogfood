@@ -1,8 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import Ctx from "../../context";
-/* import Ctx from "../../context/context"; */
-import "./style.css"
-import { Container, Carousel, Row, Col } from 'react-bootstrap';
+import { Container, Carousel } from 'react-bootstrap';
 
 const News = () => {
 	const {news} = useContext(Ctx);
@@ -24,7 +22,7 @@ const News = () => {
 
 	return	<Container>
 		<h2>Новости Lenta.ru</h2>
-		<Carousel>
+		<Carousel controls={false} indicators={false}>
 			<Carousel.Item>
 				{data.slice(0, 4).map((el,i) => <img 
 					src={el.urlToImage} 

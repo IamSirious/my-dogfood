@@ -1,5 +1,8 @@
 import AccordionFAQ from "../components/AccordionFAQ";
-import Container from 'react-bootstrap/Container';
+import { Link } from "react-router-dom";
+import { Container } from 'react-bootstrap';
+import { ChevronLeft } from "react-bootstrap-icons";
+import Breadcrumb from "../components/Breadcrumb";
 
 const dataFAQ = [
     {
@@ -32,6 +35,9 @@ const dataFAQ = [
 const FAQPage = () => {
     return <>
 		<Container>
+			<div class="py-3">
+				<Breadcrumb/>
+			</div>
 			<h1>FAQ: Вопросы и ответы</h1>
 			<p>В этом разделе вы можете найти ответы на многие вопросы, касающиеся работы нашего сайта.<br/>
 			Не нашли ответа на ваш вопрос? Свяжитесь с нами.<br/>

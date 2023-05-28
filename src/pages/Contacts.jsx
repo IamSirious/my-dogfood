@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import { Container } from 'react-bootstrap';
+import { ChevronLeft } from "react-bootstrap-icons";
+import Breadcrumb from "../components/Breadcrumb";
+
 import addr from "./../assets/images/user-addr.svg";
 import phone from "./../assets/images/user-phone.svg";
 import email from "./../assets/images/user-email.svg";
@@ -10,6 +13,9 @@ const Contacts = () => {
 			<Container>
 				<div className="row">
 					<div className="col-md-5 mr-auto">
+						<div class="py-3">
+							<Breadcrumb/>
+						</div>
 						<h3>Контакты</h3>
 						<p className="fw-bold mb-4">Адрес</p>
 						<ul className="list-unstyled pl-md-5 mb-5">

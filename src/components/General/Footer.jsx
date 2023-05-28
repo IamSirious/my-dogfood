@@ -10,7 +10,7 @@ import vk from "../../assets/images/vk.svg";
 const Footer = () => {
     return 	<footer className="bg-warning mt-4">
 		<div className="container">
-			<footer className="d-flex justify-content-center justify-content-sm-center row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5">
+			<footer className="d-flex justify-content-center justify-content-sm-center row row-cols-1 row-cols-sm-2 row-cols-md-5 pt-5 pb-3">
 				<div className="col-6 col-md-4 mb-3">
 					<Link to="/" className="d-flex align-items-center mb-3 link-dark text-decoration-none d-none d-sm-block">
 						<Logo/>
