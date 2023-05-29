@@ -1,7 +1,6 @@
-import {useState} from "react";
-import {Container, Card, CardGroup, Form, Button} from "react-bootstrap";
-import {useNavigate} from "react-router-dom";
-
+import { useState } from "react";
+import { Container, Card, CardGroup, Form, Button } from "react-bootstrap";
+import { useNavigate} from "react-router-dom";
 
 const Add = () => {
 	const navigate = useNavigate();
@@ -137,7 +136,9 @@ const Add = () => {
 										<option value={20}>20 %</option>
 										<option value={25}>25 %</option>
 										<option value={30}>30 %</option>
+										<option value={35}>35 %</option>
 										<option value={40}>40 %</option>
+										<option value={45}>45 %</option>
 										<option value={50}>50 %</option>
 									</Form.Select>
 								</Form.Group>

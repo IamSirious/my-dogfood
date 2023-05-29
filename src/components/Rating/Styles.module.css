@@ -1,6 +1,6 @@
-.fill {
-    fill:#fed700;
+.filled {
+    fill: #FFAA0D;
 }
-.edit {
+.editable {
     cursor: pointer;
 }

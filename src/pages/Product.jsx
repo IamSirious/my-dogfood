@@ -3,21 +3,23 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import "./Product.css";
 import { Accordion, ButtonGroup, Button, Container, InputGroup, Form, Row, Col, Figure, Table } from 'react-bootstrap';
 import { ChevronLeft, Star, Heart, HeartFill, Plus, Dash } from "react-bootstrap-icons";
+
 import Loader from "../components/Loader";
+import BannerOne from "../components/Banners/BannerOne";
+import Breadcrumb from "../components/Breadcrumb";
+import Rating from '../components/Rating';
+import { isLiked, discountPrice } from '../utils/Utils';
 
 import delivery from "./../assets/images/delivery.svg";
 import guarantee from "./../assets/images/guarantee.svg";
-import BannerOne from "../components/Banners/BannerOne";
-import Breadcrumb from "../components/Breadcrumb";
-
-import { isLiked, discountPrice } from '../utils/Utils';
 
 const Product = ({_id, onProductLike, description, discount, price, name, pictures, likes, reviews, wight, stock }) => {
     const [product, setProduct] = useState({});
     const {id} = useParams();
 	const [cnt, setCnt] = useState(0);
 	const discount__price = discountPrice(price, discount);
-
+	const [currentRating, setCurrentRating] = useState(1);
+	
     useEffect(() => {
         fetch(`https://api.react-learning.ru/products/${id}`, {
             headers: {
@@ -49,12 +51,7 @@ const Product = ({_id, onProductLike, description, discount, price, name, pictur
 				</div>
 					<div className="rate">
 						<span><small className="text-muted">Артикул:</small>&nbsp;{product._id}&nbsp;</span>&nbsp;
-						<Star type="radio" id="star5" name="rate" defaultValue={5} defaultChecked />&nbsp;
-						<Star type="radio" id="star4" name="rate" defaultValue={4} defaultChecked />&nbsp;
-						<Star type="radio" id="star3" name="rate" defaultValue={3} defaultChecked />&nbsp;
-						<Star type="radio" id="star2" name="rate" defaultValue={2} />&nbsp;
-						<Star type="radio" id="star1" name="rate" defaultValue={1} />&nbsp;
-						<span className="">{product.rating}</span>
+						<Rating currentRating={currentRating}/>
 					</div>
 				<div className="row">
 					<div className="col-md-6 my-4">
@@ -156,7 +153,6 @@ const Product = ({_id, onProductLike, description, discount, price, name, pictur
 				</div>
 				<div class="py-3">
 					<h4 class="title py-2">Остальные отзывы</h4>
-					<span className=""></span>
 				</div>
 			</div>
 		</Container>

@@ -5,7 +5,7 @@ import { BoxArrowLeft } from "react-bootstrap-icons";
 
 import Breadcrumb from "../components/Breadcrumb";
 
-const Profile = ({ user, avatar, color, setUser }) => {
+const Profile = ({ user, setUser, avatar, color, email, group }) => {
     const navigate = useNavigate();
 
     const captionStyle = {

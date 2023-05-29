@@ -2,10 +2,11 @@ import React, { useCallback, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
 import { api } from "../utils/api";
-import comments from "./../assets/images/comments.svg";
 import { Button, Container, Form, InputGroup } from 'react-bootstrap';
 import Breadcrumb from "../components/Breadcrumb";
 import BannerOne from "../components/Banners/BannerOne";
+
+import comments from "./../assets/images/comments.svg";
 
 const RewiewPage = () => {
 	const { productId } = useParams();

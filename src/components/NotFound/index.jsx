@@ -1,8 +1,8 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
-import ImgNotFound from './img/ic-notfound.svg';
+import { Container, Card, Button } from 'react-bootstrap';
 import { ChevronRight } from "react-bootstrap-icons";
+import ImgNotFound from './notfound.svg';
 
 const NotFound = () => {
 	return (

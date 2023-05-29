@@ -1,7 +1,7 @@
-import Card from "../components/Card";
 import { Link } from "react-router-dom"
 import { Container } from 'react-bootstrap';
 import { ChevronLeft } from "react-bootstrap-icons";
+import Card from "../components/Card";
 import Breadcrumb from "../components/Breadcrumb";
 
 const Favorites = ({goods, userId, setServerGoods}) => {
