@@ -4,17 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 // подключаем контекст
 import Ctx from "./context";
-/*
-	<Ctx.Provider>
-		<CtxUser.Provider>
-			<Header/>
-			<Modal/>
-		</CtxUser.Provider>
-		<Component3/>
-		<Component4/>
-		<Component5/>
-	</Ctx.Provider>
-*/
+// подключаем API
+import Api from "./api";
 
 // компоненты (кусочки кода, которые используются многократно)
 import {Header, Footer} from "./components/General";
@@ -32,10 +23,11 @@ import Contacts from "./pages/Contacts"
 import FAQPage from "./pages/FAQPage"
 import RewiewPage from "./pages/RewiewPage";
 import Add from './pages/AddProduct';
+import Basket from "./pages/Basket";
+import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
-	 // let key = "b23e55bf2a7d4641963abdd0f40a658b"
-	"https://newsapi.org/v2/everything?apiKey=b23e55bf2a7d4641963abdd0f40a658b&q=dogs"
+	// "https://newsapi.org/v2/everything?apiKey=b23e55bf2a7d4641963abdd0f40a658b&q=dogs" 
 	const [user, setUser] = useState(localStorage.getItem("rockUser"));
 	const [token, setToken] = useState(localStorage.getItem("rockToken"));
 	const [userId, setUserId] = useState(localStorage.getItem("rockId"));
@@ -47,31 +39,46 @@ const App = () => {
 	const [goods, setGoods] = useState(serverGoods);
 	// Получаем новости
 	const [news, setNews] = useState([]);
-	useEffect(() => {
-		fetch("https://newsapi.org/v2/everything?q=животные&sources=lenta&apiKey=b23e55bf2a7d4641963abdd0f40a658b")
-			.then(res => res.json())
-			.then(data => {
-				console.log(data);
-				setNews(data.articles)
-			})
-	}, [])
+	const [api, setApi] = useState(new Api(token));
+
+	// basket from LS =)
+	let bStore = localStorage.getItem("rockBasket");
+	// if (bStore && bStore[0] === "[" && bStore[bStore.length - 1] === "]") {
+	if (bStore) {
+		bStore = JSON.parse(bStore);
+	} else {
+		bStore = [];
+	}
+	const [basket, setBasket] = useState(bStore);
+
+	// useEffect(() => {
+	// 	fetch("https://newsapi.org/v2/everything?q=животные&sources=lenta&apiKey=b23e55bf2a7d4641963abdd0f40a658b")
+	// 		.then(res => res.json())
+	// 		.then(data => {
+	// 			console.log(data);
+	// 			setNews(data.articles)
+	// 		})
+	// }, [])
 	const [modalActive, setModalActive] = useState(false);
 
 	// useEffect срабатывает каждый раз, когда компонент создался или перерисовался
 	useEffect(() => {
-		if (token) {
-			fetch("https://api.react-learning.ru/products", {
-				headers: {
-					"Authorization": `Bearer ${token}`
-				}
-			})
-				.then(res => res.json())
+		setApi(new Api(token));
+	}, [token])
+	
+	useEffect(() => {
+		localStorage.setItem("rockBasket", JSON.stringify(basket));
+	}, [basket])
+	
+	useEffect(() => {
+		if (api.token) {
+			api.getProduct()
 				.then(data => {
 					console.log(data);
 					setServerGoods(data.products.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()));
 				})
 		}
-	}, [token])
+	}, [api.token])
 
 	useEffect(() => {
 		if (!goods.length) {
@@ -92,11 +99,11 @@ const App = () => {
 		console.log("u", user);
 	}, [user]);
 
-	const ctxVal = {
-		goods,
-		setGoods,
-		news
-	}
+	// const ctxVal = {
+	// 	goods,
+	// 	setGoods,
+	// 	news
+	// }
 
 	return (
 		// value - объект с данными контекста
@@ -122,7 +129,10 @@ const App = () => {
 			text,
 			setText,
 			userId,
-			token
+			token,
+			api,
+			basket,
+			setBasket
 		}}>
 			<Header 
 				user={user} 
@@ -152,6 +162,8 @@ const App = () => {
 					}/>
 					<Route path="/product/:id" element={<Product/>}/>
 					<Route path="/rewiew/:productId" element={<RewiewPage/>}/>
+					<Route path="/basket" element={<Basket/>}/>
+					<Route path="*" element={<NotFoundPage/>}/>
 				</Routes>
 				{/* 
 					/v2/:gr/posts/likes/:id

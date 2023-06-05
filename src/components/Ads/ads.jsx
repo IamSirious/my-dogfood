@@ -14,10 +14,10 @@ export default () => {
 
 
 
-/* 		<div class="p-5 mb-4 rounded-3">
-			<div class="container-fluid py-5" data-before="%" style={{backgroundColor: '#FF8F27'}}>
-				<h1 class="display-5 fw-bold">Подарок за первый заказ!</h1>
-				<p class="col-md-8 fs-4">Легкое говяжье - пластины</p>
-				<button class="btn btn-primary btn-lg" type="button">Example button</button>
+/* 		<div className="p-5 mb-4 rounded-3">
+			<div className="container-fluid py-5" data-before="%" style={{backgroundColor: '#FF8F27'}}>
+				<h1 className="display-5 fw-bold">Подарок за первый заказ!</h1>
+				<p className="col-md-8 fs-4">Легкое говяжье - пластины</p>
+				<button className="btn btn-primary btn-lg" type="button">Example button</button>
 			</div>
 		</div> */

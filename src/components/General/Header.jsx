@@ -1,5 +1,5 @@
 import Logo from "./Logo";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import Search from '../Search/';
 import { Badge, Button, Container } from 'react-bootstrap';
@@ -12,13 +12,25 @@ import {
 } from "react-bootstrap-icons";
 import profile from "../../assets/images/profile1.svg";
 
+import Ctx from "../../context";
+
 const Header = ({user, setModalActive, serverGoods}) => {
     const [likeCnt, setLikeCnt] = useState(0);
     const [cartCnt, setCartCnt] = useState(0);
+	const {basket} = useContext(Ctx);
     useEffect(() => {
         // Фильтруем только те товары, у которых в лайках есть id нашего пользователя - id берем из ls, ибо мы про него забыли))
         setLikeCnt(serverGoods.filter(el => el.likes.includes(localStorage.getItem("rockId"))).length)
     }, [serverGoods]);
+
+    useEffect(() => {
+        // let cnt = 0;
+        // for (let i = 0; i < basket.length; i++) {
+        //     cnt += basket[i].cnt
+        // }
+        // setCartCnt(cnt);
+        setCartCnt(basket.reduce((acc, el) => acc + el.cnt, 0))
+    }, [basket])
 
     const logIn = (e) => {
         e.preventDefault();
@@ -47,22 +59,22 @@ const Header = ({user, setModalActive, serverGoods}) => {
 								<li className="nav-item">
 									<Link to="/favorites" className="nav-link position-relative" title="Избранное">
 										<Heart size="24" />
-											<span className="position-absolute top-end translate-middle badge text-bg-success rounded">
+											<span className="position-absolute top-end translate-middle badge text-bg-success rounded-circle">
 												{likeCnt}
 											</span>
 									</Link>
 								</li>
 								<li className="nav-item position-relative">
-									<Link to="/" className="nav-link" title="Корзина">
+									<Link to="/basket" className="nav-link" title="Корзина">
 										<Bag size="24"/>
-										<span className="position-absolute top-end translate-middle badge text-bg-success rounded">
-											{cartCnt}
-										</span>
+											<span className="position-absolute top-end translate-middle badge text-bg-success rounded-circle">
+												{cartCnt}
+											</span>
 									</Link>
 								</li>
 								<li className="nav-item">
 									<Link to="/profile" className="nav-link" title="Войти">
-										<img src={profile} class="" alt="profile"/>
+										<img src={profile} className="" alt="profile"/>
 									</Link>
 								</li>
 						</ul>}

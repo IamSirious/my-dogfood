@@ -13,7 +13,7 @@ const Contacts = () => {
 			<Container>
 				<div className="row">
 					<div className="col-md-5 mr-auto">
-						<div class="py-3">
+						<div className="py-3">
 							<Breadcrumb/>
 						</div>
 						<h3>Контакты</h3>
@@ -25,7 +25,7 @@ const Contacts = () => {
 							<small className="text-muted mx-4">ИП Чижова Мария Николаевна ИНН 891301550270</small>
 						</ul>
 					</div>
-					<div class="col-md-6 d-flex align-items-stretch">
+					<div className="col-md-6 d-flex align-items-stretch">
 						<div id="map">
 
 						</div>

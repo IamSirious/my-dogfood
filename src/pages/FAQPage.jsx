@@ -35,7 +35,7 @@ const dataFAQ = [
 const FAQPage = () => {
     return <>
 		<Container>
-			<div class="py-3">
+			<div className="py-3">
 				<Breadcrumb/>
 			</div>
 			<h1>FAQ: Вопросы и ответы</h1>
