@@ -44,3 +44,8 @@
 	font-size: 20px;
 	font-weight: 800;
 }
+
+small {
+	display: flex;
+	gap: 5px;
+}

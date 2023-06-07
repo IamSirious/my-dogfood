@@ -40,13 +40,13 @@ const Header = ({user, setModalActive, serverGoods}) => {
     }
     return	<header>
 		<nav className="navbar navbar-expand-md navbar-warning bg-warning" aria-label="Eighth navbar example">
-			<div className="container">
+			<Container>
 				<Link to="/" className="navbar-brand"><Logo/></Link>
 				<Search arr={serverGoods} />
 
-				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+				<Button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample" aria-controls="navbarsExample" aria-expanded="false" aria-label="Toggle navigation">
 					<span className="navbar-toggler-icon"></span>
-				</button>
+				</Button>
 				
 				<div className="col-md-2 ms-3 text-end">
 					<div className="collapse navbar-collapse">
@@ -87,7 +87,7 @@ const Header = ({user, setModalActive, serverGoods}) => {
 						</ul>}
 					</div>
 				</div>
-			</div>
+			</Container>
 		</nav>
 	</header>
 }

@@ -17,12 +17,12 @@ const Card = ({
 	tags, 
 	likes
 }) => {
-	const { setServerGoods, userId, api, setBasket, serverGoods, basket } = useContext(Ctx);
+	const { serverGoods, setServerGoods, userId, api, basket, setBasket } = useContext(Ctx);
 	// проверка, есть ли id пользователя в массиве с лайками товара
 	const [isLike, setIsLike] = useState(likes.includes(userId));
 	const [inBasket, setInBasket] = useState(basket.filter(el => el.id === _id).length > 0)
-
-	const addToCart  = (e) => {
+	
+	const addToCart = (e) => {
 		e.preventDefault();
 		e.stopPropagation();
 		setInBasket(true);
@@ -34,7 +34,13 @@ const Card = ({
 			price: price,
 			discount: discount
 		}])
+		handleClick();
 	}
+
+	const [active, setActive] = useState(false);
+	const handleClick = () => {
+		setActive(!active);
+	};
 
 	const updLike = (e) => {
 		e.stopPropagation();
@@ -76,7 +82,7 @@ const Card = ({
 				<small className="text-muted px-2">{tags.map(el => <span key={el}>{el}</span>)}</small>
 				<div className="card-footer card-footer-color border-0">
 					<div className="btn-group">
-						<Button variant="warning" className="rounded-pill px-3" onClick={addToCart} disabled={inBasket}>В корзину</Button>
+						<Button variant="warning" className="rounded-pill px-3" onClick={addToCart} disabled={inBasket}>{ active ? "В корзине" : "В корзину"}</Button>
 					</div>
 				</div>
 			</Link>
@@ -85,3 +91,10 @@ const Card = ({
 }
 
 export default Card;
+
+
+	/* const [buttonText, setButtonText] = useState('В корзину');
+	const handleClick = () => {
+		setButtonText('В корзине');
+	};
+	<Button variant="warning" className="rounded-pill px-3" onClick={handleClick} disabled={inBasket}>{buttonText}</Button> */

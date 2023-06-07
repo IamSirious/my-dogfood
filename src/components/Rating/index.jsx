@@ -1,46 +1,30 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
-import s from './styles.module.css';
-import cn from 'classnames';
-import { ReactComponent as StarIcon } from './star.svg'; 
+import Rating from "react-rating";
+import './style.css';
+import star from "../../assets/images/star.svg";
+import starfill from "../../assets/images/star-fill.svg";
 
-
-function Rating({isEditable = false, currentRating, setCurrentRating}) {
-    const [ratingArray, setRattingArray] = useState(new Array(5).fill(<></>));
-    const constructRating = (filledRating) => {
-
-        const updateArray = ratingArray.map((ratingElement, index) => {
-            return (
-                <StarIcon className={cn(s.star,
-                {
-                    [s.filled] : index < filledRating,
-                    [s.editable] : isEditable
-                })}
-                onMouseEnter = {() => changeDisplay(index + 1)}
-                onMouseLeave = {() => changeDisplay(currentRating)}
-                onClick = {() => changeRating(index + 1)}
-                />
-            )
-        })
-
-        setRattingArray(updateArray);
-    }
-
-    function changeDisplay(rating){
-        constructRating(rating)
-    }
-
-    function changeRating(rating){
-        if (!isEditable || !setCurrentRating) return
-        setCurrentRating(rating)
-    }
-
-    useEffect(() => {
-        constructRating(currentRating);
-    }, [currentRating])
-
-    return (
-        ratingArray.map((r, i) => <span key={i}>{r}</span>)
-    );
+function StarRating() {
+	const [rating, setRating] = useState(0);
+ 
+	return (
+		<>
+			<Rating
+				fractions={2}
+				emptySymbol={<img src={star} alt="rating" className=""/>}
+				fullSymbol={<img src={starfill} alt="rating" className=""/>}
+				initialRating={rating}
+				onClick={rate => setRating(rate)}
+			/>
+			<span> Rating: {rating}</span>
+		</>
+	);
 }
+ 
+export default StarRating;
 
-export default Rating;
+	// <Rating
+		// emptySymbol={<img src={star} alt="rating" className=""/>}
+		// fullSymbol={<img src={starfill} alt="rating" className=""/>}
+	// />

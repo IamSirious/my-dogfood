@@ -90,7 +90,7 @@ const Modal = ({active, setActive, setUser}) => {
 								value={name} 
 								onChange={(e) => setName(e.target.value)}
 							/>
-							<label for="floatingInput">Email</label>
+							<label htmlFor="floatingInput">Email</label>
 						</div>}
 						<div className="form-floating mb-3">
 							<input
@@ -101,7 +101,7 @@ const Modal = ({active, setActive, setUser}) => {
 								value={email} 
 								onChange={(e) => setEmail(e.target.value)}
 							/>
-							<label for="floatingInput">Email</label>
+							<label htmlFor="floatingInput">Email</label>
 						</div>
 						<div className="form-floating mb-3">
 							<input 
@@ -112,7 +112,7 @@ const Modal = ({active, setActive, setUser}) => {
 								value={pwd} 
 								onChange={(e) => setPwd(e.target.value)}
 							/>
-							<label for="floatingPassword">Password</label>
+							<label htmlFor="floatingPassword">Password</label>
 						</div>
 						{!auth && <div className="form-floating mb-3">
 							<input 
@@ -123,7 +123,7 @@ const Modal = ({active, setActive, setUser}) => {
 								value={testPwd} 
 								onChange={(e) => setTestPwd(e.target.value)}
 							/>
-							<label for="floatingPassword">Password</label>
+							<label htmlFor="floatingPassword">Password</label>
 						</div>}
 
 					</form>

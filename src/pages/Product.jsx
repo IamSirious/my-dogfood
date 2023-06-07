@@ -8,7 +8,7 @@ import Ctx from "../context";
 import Loader from "../components/Loader";
 import BannerOne from "../components/Banners/BannerOne";
 import Breadcrumb from "../components/Breadcrumb";
-import Rating from '../components/Rating';
+import StarRating from '../components/Rating';
 import { isLiked, discountPrice } from '../utils/Utils';
 
 import delivery from "./../assets/images/delivery.svg";
@@ -18,19 +18,24 @@ const Product = () => {
 	const [product, setProduct] = useState({});
 	const {id} = useParams();
 	const navigate = useNavigate();
-	const {userId, setServerGoods, api} = useContext(Ctx);
+	const {userId, setServerGoods, api, basket, setBasket} = useContext(Ctx);
 	const [cnt, setCnt] = useState(0);
 	const [currentRating, setCurrentRating] = useState(1);
+	
+	useEffect(() => {
+		api.getSingleProduct(id)
+			.then(data => {
+				if (!data.err) {
+					console.log(data);
+					setProduct(data);
+				}
+			})
+	}, []);
 
-    useEffect(() => {
-        api.getSingleProduct(id)
-            .then(data => {
-                if (!data.err) {
-                    console.log(data);
-                    setProduct(data);
-                }
-            })
-    }, []);
+	const [active, setActive] = useState(false);
+	const addToCart = () => {
+		setActive(!active);
+	};
 
 	/*
 		product?.name
@@ -38,14 +43,14 @@ const Product = () => {
 		product && product.name
 	*/
 
-    const del = () => {
-        api.delProduct(id)
-            .then(data => {
-                console.log(data);
-                setServerGoods(prev => prev.filter(el => el._id !== id))
-                navigate("/catalog")
-            })
-    }
+	const del = () => {
+		api.delProduct(id)
+			.then(data => {
+				console.log(data);
+				setServerGoods(prev => prev.filter(el => el._id !== id))
+				navigate("/catalog")
+			})
+	}
 
 	return <>
 		<Container>
@@ -66,7 +71,7 @@ const Product = () => {
 						</div>
 							<div className="rate">
 								<span><small className="text-muted">Артикул:</small>&nbsp;{product._id}&nbsp;</span>&nbsp;
-								<Rating currentRating={currentRating}/>
+								<StarRating/>
 							</div>
 						<div className="row">
 							<div className="col-md-6 my-4">
@@ -90,7 +95,7 @@ const Product = () => {
 											</ButtonGroup>
 										</div>
 										<div className="col-md-6 mt-3">
-											<Button className="rounded-pill mx-3" size="lg" variant="warning">В корзину</Button>
+											<Button className="rounded-pill mx-3" size="lg" variant="warning" onClick={addToCart}>{ active ? "В корзине" : "В корзину"}</Button>
 										</div>
 									</div>
 									<div className="row my-3">
@@ -98,31 +103,31 @@ const Product = () => {
 									</div>
 								</div>
 								<div className="card bg-light mb-3 border-0 rounded-4" style={{maxWidth: "400px"}}>
-								  <div className="row g-0">
-									<div className="col-md-1">
-									  <img src={delivery} className="rounded-start mt-3 ms-2" alt="delivery"/>
+									<div className="row g-0">
+										<div className="col-md-1">
+											<img src={delivery} className="rounded-start mt-3 ms-2" alt="delivery"/>
+										</div>
+										<div className="col-md-11">
+											<div className="card-body">
+												<h5 className="card-title ms-2">Доставка по всему Миру!</h5>
+												<p className="card-text ms-2 mb-2">Доставка курьером — от 399 ₽</p>
+												<p className="card-text ms-2">Доставка в пункт выдачи — от 199 ₽</p>
+											</div>
+										</div>
 									</div>
-									<div className="col-md-11">
-									  <div className="card-body">
-										<h5 className="card-title ms-2">Доставка по всему Миру!</h5>
-										<p className="card-text ms-2 mb-2">Доставка курьером — от 399 ₽</p>
-										<p className="card-text ms-2">Доставка в пункт выдачи — от 199 ₽</p>
-									  </div>
-									</div>
-								  </div>
 								</div>
 								<div className="card bg-light mb-3 border-0 rounded-4" style={{maxWidth: "400px"}}>
-								  <div className="row g-0">
-									<div className="col-md-1">
-									  <img src={guarantee} className="rounded-start mt-3 ms-2" alt="guarantee"/>
+									<div className="row g-0">
+										<div className="col-md-1">
+											<img src={guarantee} className="rounded-start mt-3 ms-2" alt="guarantee"/>
+										</div>
+										<div className="col-md-11">
+											<div className="card-body">
+												<h5 className="card-title ms-2">Гарантия качества</h5>
+												<p className="card-text ms-2 lh-sm">Если Вам не понравилось качество нашей продукции, мы вернем деньги, либо сделаем все возможное, чтобы удовлетворить ваши нужды.</p>
+											</div>
+										</div>
 									</div>
-									<div className="col-md-11">
-									  <div className="card-body">
-										<h5 className="card-title ms-2">Гарантия качества</h5>
-										<p className="card-text ms-2 lh-sm">Если Вам не понравилось качество нашей продукции, мы вернем деньги, либо сделаем все возможное, чтобы удовлетворить ваши нужды.</p>
-									  </div>
-									</div>
-								  </div>
 								</div>
 							</div>
 						</div>

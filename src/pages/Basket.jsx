@@ -142,7 +142,7 @@ const Basket = () => {
 									</ListGroup.Item>
 									<ListGroup.Item className="d-flex justify-content-between align-items-center border-0 border-bottom px-0">
 										Скидка
-										<span className="fw-bold" style={{ color: "red" }}>- {sum - sale} ₽</span>
+										<span className="fw-bold" style={{ color: "red" }}>- {sum - sale.toFixed(2)} ₽</span>
 									</ListGroup.Item>
 									<ListGroup.Item className="d-flex justify-content-between align-items-center border-0 px-0 mb-3" style={{ borderRadius: "0" }}>
 										<span className="fw-bold">Общая стоимость</span>

@@ -2,7 +2,7 @@ import React, { useCallback, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
 import { api } from "../utils/api";
-import { Button, Container, Form, InputGroup } from 'react-bootstrap';
+import { Button, Container, Form, FloatingLabel, InputGroup, Card, Col, Row } from 'react-bootstrap';
 import Breadcrumb from "../components/Breadcrumb";
 import BannerOne from "../components/Banners/BannerOne";
 
@@ -21,31 +21,27 @@ const RewiewPage = () => {
 
 	return (
 		<Container>
-			<div className="card pt-4 border-0 rounded-4 vh-100">
+			<Card className="pt-4 border-0 rounded-4 vh-100">
 				<Breadcrumb/>
-				<div className="row">
+				<Row>
 					<h4>{`Отзыв о товаре ${product?.name}`}</h4>
-					<div className="col-md-1">
+					<Col md="1">
 						<img src={comments} className="rounded-start my-2 ms-4" alt="comments"/>
-					</div>
-					<div className="col-md-11">
+					</Col>
+					<Col md="11">
 						<InputGroup>
-							<div className="form-floating">
-								<textarea
-									className="form-control"
-									placeholder="Отзыв"
-									aria-label="Отзыв о товаре"
-									aria-describedby="rewiew"
-									id="floatingTextarea"
-									style={{height: "100px"}}>
-								</textarea>
-								<label for="floatingTextarea">Отзыв</label>
-							</div>
+							<FloatingLabel controlId="floatingTextarea" label="Отзыв">
+								<Form.Control
+									as="textarea"
+									placeholder="Оставьте отзыв здесь"
+									style={{ height: '100px' }}
+								/>
+							</FloatingLabel>
 							<Button size="lg" variant="warning" id="rewiew" onClick={handleRewiew}>Отправить отзыв</Button>
 						</InputGroup>
-					</div>
-				</div>
-			</div>
+					</Col>
+				</Row>
+			</Card>
 			<BannerOne />
 		</Container>
 	)

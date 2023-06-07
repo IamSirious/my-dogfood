@@ -6,8 +6,6 @@ import BannerOne from "../components/Banners/BannerOne";
 import BannerTwo from "../components/Banners/BannerTwo";
 import News from "../components/News";
 
-import { Container } from 'react-bootstrap';
-
 export default ({ data }) => {
     return <>
 		<Hero/>
