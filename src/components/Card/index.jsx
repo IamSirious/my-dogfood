@@ -1,27 +1,19 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./style.css";
 import { Link } from "react-router-dom";
-import { Button, Container } from 'react-bootstrap';
+import { Button, Container, Col } from 'react-bootstrap';
 import { Heart, HeartFill, Percent } from "react-bootstrap-icons"
 
 import Ctx from "../../context";
 import { discountPrice } from "../../utils/Utils";
 
 // {img, name, price} => props (props.img, props.name, props.price)
-const Card = ({
-	img, 
-	name, 
-	price, 
-	_id, 
-	discount, 
-	tags, 
-	likes
-}) => {
+const Card = ({	img, name, price, _id, discount, tags, likes, stock }) => {
 	const { serverGoods, setServerGoods, userId, api, basket, setBasket } = useContext(Ctx);
 	// проверка, есть ли id пользователя в массиве с лайками товара
 	const [isLike, setIsLike] = useState(likes.includes(userId));
 	const [inBasket, setInBasket] = useState(basket.filter(el => el.id === _id).length > 0)
-	
+
 	const addToCart = (e) => {
 		e.preventDefault();
 		e.stopPropagation();
@@ -66,7 +58,7 @@ const Card = ({
 	const discount__price = discountPrice(price, discount);
 
 	return (
-		<div className="col">
+		<Col>
 			<Link className="card h-100 border-0 shadow-sm text-dark text-decoration-none" to={`/product/${_id}`}>
 				{discount > 0 && <span className="card__discount">&nbsp;-{discount}<Percent/>&nbsp;</span>}
 				<span className="card__like" onClick={updLike}>
@@ -82,19 +74,29 @@ const Card = ({
 				<small className="text-muted px-2">{tags.map(el => <span key={el}>{el}</span>)}</small>
 				<div className="card-footer card-footer-color border-0">
 					<div className="btn-group">
-						<Button variant="warning" className="rounded-pill px-3" onClick={addToCart} disabled={inBasket}>{ active ? "В корзине" : "В корзину"}</Button>
+						<Button variant="warning" className="rounded-pill px-3 btn-in" onClick={addToCart} disabled={inBasket}>{ !inBasket ? "В корзину" : "В корзине"}</Button>
 					</div>
 				</div>
 			</Link>
-		</div>
+		</Col>
 	)
 }
 
 export default Card;
 
-
-	/* const [buttonText, setButtonText] = useState('В корзину');
+	/* 
+	
+	const [buttonText, setButtonText] = useState('В корзину');
 	const handleClick = () => {
 		setButtonText('В корзине');
 	};
-	<Button variant="warning" className="rounded-pill px-3" onClick={handleClick} disabled={inBasket}>{buttonText}</Button> */
+	<Button variant="warning" className="rounded-pill px-3" onClick={handleClick} disabled={inBasket}>{buttonText}</Button> 
+	
+	
+	или добавить в addToCart после }])  handleClick();
+	const [active, setActive] = useState(false);
+	const handleClick = () => {
+		setActive(!active);
+	};
+	
+	*/

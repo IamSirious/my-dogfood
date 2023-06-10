@@ -9,5 +9,6 @@ export default createContext({
     },
     // TODO: создать контекст для корзины, работающий с LS
     goods: [],
-    setGoods: () => {}
+    setGoods: () => {},
+	setBaseData: () => {}
 });

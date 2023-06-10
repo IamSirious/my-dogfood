@@ -49,3 +49,8 @@ small {
 	display: flex;
 	gap: 5px;
 }
+
+.btn-in:disabled {
+    opacity: .6;
+    cursor: default;
+}

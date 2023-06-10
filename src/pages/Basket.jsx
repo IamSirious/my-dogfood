@@ -44,7 +44,7 @@ const Basket = () => {
 	}
 	return (
 		<section className="h-100 gradient-custom">
-			<Container className="py-5 h-50">
+			<Container className="py-5">
 				<Row className="justify-content-center my-4">
 					<Col md="8">
 						<Card className="mb-4 border-0">
@@ -169,7 +169,6 @@ const Basket = () => {
 								</Col>
 							</Row>
 						</Card>
-						
 					</Col>
 				</Row>
 			</Container>
