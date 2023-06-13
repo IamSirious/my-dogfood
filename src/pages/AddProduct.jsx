@@ -44,7 +44,7 @@ const Add = () => {
 		setPrice(100);
 		setPictures('https://static.wikia.nocookie.net/manhuntgame/images/c/ce/Bitch%27n%27DogFood-Logo.png');
 		setDiscount(0);
-		setDescription("Описание товара");
+		setDescription("");
 		setWight("100 г");
 		setStock(200);
 		setTags(["df"]);

@@ -7,7 +7,7 @@ import UpdatedInput from "../components/UpdatedInput";
 import Breadcrumb from "../components/Breadcrumb";
 
 import { Button, Container, Card, Image, Row, Col, Figure } from 'react-bootstrap';
-import { BoxArrowLeft } from "react-bootstrap-icons";
+import { BoxArrowLeft, DoorOpenFill } from "react-bootstrap-icons";
 
 const Profile = ({ setUser }) => {
 	const navigate = useNavigate();
@@ -52,8 +52,8 @@ const Profile = ({ setUser }) => {
 			{userData?.name && <>
 				<Card className="my-3" border="warning">
 					<Card.Header as="h5" className="bg-warning" border="warning">Профиль</Card.Header>
-					<div className="row g-0 my-3 mx-3">
-						<div className="col-md-4">
+					<Row className="g-0 my-3 mx-3">
+						<Col md="4">
 							<Figure>
 								<Figure.Image thumbnail
 									src={userData.avatar}
@@ -71,8 +71,8 @@ const Profile = ({ setUser }) => {
 									 />
 								</Figure.Caption>
 							</Figure>
-						</div>
-						<div className="col-md-8">
+						</Col>
+						<Col md="8">
 							<Card.Body>
 								<Card.Title>
 									<div><UpdatedInput
@@ -93,10 +93,15 @@ const Profile = ({ setUser }) => {
 										name="about"
 									/></div>
 								</Card.Text>
-								<Button variant="warning" onClick={logOut} title="Выйти"><BoxArrowLeft/></Button>
+								
 							</Card.Body>
+						</Col>
+					</Row>
+					<Card.Footer>
+						<div className="d-grid gap-2 col-3 mx-auto">
+							<Button variant="outline-danger" onClick={logOut}><DoorOpenFill/>&nbsp;Выйти</Button>
 						</div>
-					</div>
+					</Card.Footer>
 				</Card>
 			</>}
 		</Container>

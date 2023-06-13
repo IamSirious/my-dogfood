@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Container } from 'react-bootstrap';
+import { Container, Col, Row } from 'react-bootstrap';
 import { ChevronLeft } from "react-bootstrap-icons";
 import Breadcrumb from "../components/Breadcrumb";
 
@@ -11,11 +11,11 @@ const Contacts = () => {
     return <>
 		<div className="content">
 			<Container>
-				<div className="row">
-					<div className="col-md-5 mr-auto">
-						<div className="py-3">
-							<Breadcrumb/>
-						</div>
+				<div className="py-3">
+					<Breadcrumb/>
+				</div>
+				<Row className="py-3 justify-content-between">
+					<Col md="5">
 						<h3>Контакты</h3>
 						<p className="fw-bold mb-4">Адрес</p>
 						<ul className="list-unstyled pl-md-5 mb-5">
@@ -24,13 +24,11 @@ const Contacts = () => {
 							<li className="d-flex text-black mb-2"><span className="mr-3"><span className="icon-envelope-o"><img src={email} className="" style={{ width: 30, height: 30 }} alt="email"/></span></span><p className="mx-2"> hordog.ru@gmail.com</p></li>
 							<small className="text-muted mx-4">ИП Чижова Мария Николаевна ИНН 891301550270</small>
 						</ul>
-					</div>
-					<div className="col-md-6 d-flex align-items-stretch">
-						<div id="map">
-
-						</div>
-					</div>
-				</div>
+					</Col>
+					<Col md="7" style={{overflow: 'hidden'}}>
+						<iframe className="rounded" src="https://yandex.ru/map-widget/v1/?from=tabbar&ll=47.919697%2C56.627028&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgg1NzkxMzU2NBJw0KDQvtGB0YHQuNGPLCDQoNC10YHQv9GD0LHQu9C40LrQsCDQnNCw0YDQuNC5INCt0LssINCZ0L7RiNC60LDRgC3QntC70LAsINCb0LXQvdC40L3RgdC60LjQuSDQv9GA0L7RgdC_0LXQutGCLCAxMiIKDbStP0IV0IFiQg%2C%2C&source=serp_navig&z=16.4" width="600" height="400" frameborder="1" allowfullscreen="true" style={{position:'relative'}}></iframe>
+					</Col>
+				</Row>
 			</Container>
 		</div>
     </>
