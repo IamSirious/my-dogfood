@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { ButtonGroup, Button, Card, Col, Container, Form, ListGroup, Row, Tooltip } from 'react-bootstrap';
 import { ChevronLeft, Star, Heart, HeartFill, Plus, Dash, Trash } from "react-bootstrap-icons";
 
-import { isLiked } from '../utils/Utils';
 import Ctx from "../context";
 import inc from "../utils/inc";
 import dec from "../utils/dec";
@@ -15,7 +14,6 @@ import gift from "./../assets/images/gift.png";
 
 const Basket = () => {
 	const { basket, setBasket } = useContext(Ctx);
-	const [cnt, setCnt] = useState(0);
 
 	const sum = basket.reduce((acc, el) => {
 		return acc + el.cnt * el.price
@@ -35,27 +33,6 @@ const Basket = () => {
 		setBasket([])
 	}
 	
-	const inc = (id) => {
-		setBasket(prev => prev.map(el => {
-			if (el.id === id) {
-				el.cnt++;
-			}
-			return el;
-		}))
-	}
-	const dec = (id, cnt) => {
-		if (cnt === 1) {
-			setBasket(prev => prev.filter(el => el.id !== id))
-		} else {
-			setBasket(prev => prev.map(el => {
-				if (el.id === id) {
-					el.cnt--;
-				}
-				return el;
-			}))
-		}
-	}
-
 	const textCnt = (cnt) => {
 		if (cnt % 100 >= 5 && cnt % 100 <= 20) {
 			return cnt + ' товаров';
@@ -101,7 +78,7 @@ const Basket = () => {
 
 										<Col lg="2" md="6" className="d-flex justify-content-center align-items-center mb-lg-0">
 											<ButtonGroup>
-												<Button className="border border-end-0 rounded-start-pill" size="md" variant="" disabled={cnt} onClick={() => dec(el.id, el.cnt, setBasket)}><Dash/></Button>
+												<Button className="border border-end-0 rounded-start-pill" size="md" variant="" disabled={el.cnt} onClick={() => dec(el.id, el.cnt, setBasket)}><Dash/></Button>
 												<Button className="border border-start-0 border-end-0" size="md" variant="" type="number" min={0} defaultValue={1} disabled>{el.cnt}</Button>
 												<Button className="border border-start-0 rounded-end-pill" size="md" variant="" onClick={() => inc(el.id, setBasket)}><Plus/></Button>
 											</ButtonGroup>

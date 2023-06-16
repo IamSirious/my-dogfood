@@ -6,7 +6,7 @@ import UpdatedInput from "../components/UpdatedInput";
 
 import Breadcrumb from "../components/Breadcrumb";
 
-import { Button, Container, Card, Image, Row, Col, Figure } from 'react-bootstrap';
+import { Button, Container, Card, Image, ListGroup, Row, Col, Figure } from 'react-bootstrap';
 import { BoxArrowLeft, DoorOpenFill } from "react-bootstrap-icons";
 
 const Profile = ({ setUser }) => {
@@ -15,15 +15,17 @@ const Profile = ({ setUser }) => {
 	const [userData, setUserData] = useState({});
 	const [inpName, setInpName] = useState(false);
 	const [inpAbout, setInpAbout] = useState(false);
+	const [inpGroup, setInpGroup] = useState(false);
 	const [inpAvatar, setInpAvatar] = useState(false);
 
 	const updUser = (name, val) => {
 		let body = {
 			name: userData.name,
-			about: userData.about
+			about: userData.about,
+			group: userData.group
 		}
 		if (name === "avatar") {
-			body =  {avatar: userData.avatar};
+			body =	{avatar: userData.avatar};
 		}
 		body[name] = val;
 		api.updProfile(body, name === "avatar").then(data => setUserData(data));
@@ -73,27 +75,42 @@ const Profile = ({ setUser }) => {
 							</Figure>
 						</Col>
 						<Col md="8">
-							<Card.Body>
-								<Card.Title>
-									<div><UpdatedInput
-										val={userData.name}
-										isActive={inpName}
-										changeActive={setInpName}
-										upd={updUser}
-										name="name"
-									/></div>
-								</Card.Title>
-								<Card.Text>
-									<Link to={`mailto:${userData.email}`}>{userData.email}</Link>
-									<div><UpdatedInput
-										val={userData.about}
-										isActive={inpAbout}
-										changeActive={setInpAbout}
-										upd={updUser}
-										name="about"
-									/></div>
-								</Card.Text>
-								
+							<Card.Body className="py-0">
+								<ListGroup variant="flush">
+									<ListGroup.Item className="mb-2">
+										<UpdatedInput
+											val={userData.name}
+											isActive={inpName}
+											changeActive={setInpName}
+											upd={updUser}
+											name="name"
+										/>
+									</ListGroup.Item>
+
+									<ListGroup.Item className="my-2">
+										<Link to={`mailto:${userData.email}`}>{userData.email}</Link>
+									</ListGroup.Item>
+
+									<ListGroup.Item className="my-2">
+										<UpdatedInput
+											val={userData.group}
+											isActive={inpGroup}
+											changeActive={setInpGroup}
+											upd={updUser}
+											name="group"
+										/>
+									</ListGroup.Item>
+
+									<ListGroup.Item className="my-2">
+										<UpdatedInput
+											val={userData.about}
+											isActive={inpAbout}
+											changeActive={setInpAbout}
+											upd={updUser}
+											name="about"
+										/>
+									</ListGroup.Item>
+								</ListGroup>
 							</Card.Body>
 						</Col>
 					</Row>
@@ -110,66 +127,3 @@ const Profile = ({ setUser }) => {
 
 export default Profile;
 
-
-/* 		<Container>
-			<Row>
-				<Col xs={12} md={8}>
-					<h1>Профиль</h1>
-					<p className="profile-row">
-						{!nameFlag 
-							? <>
-								<span className="display-4">{name}</span>
-								<PencilSquare onClick={() => setNameFlag(true)}/>
-							</>
-							: <>
-								<Form.Control type="text" value={name} required onChange={e => setName(e.target.value)}/>
-								<Check2Square onClick={user} style={{color: "black"}}/>
-								<XSquare onClick={() => {
-									setName(user.name);
-									setNameFlag(false);
-								}}/>
-							</>
-						}
-					</p>
-					<p className="profile-row">
-						{!textFlag 
-							? <>
-								<span className="display-6">{text}</span>
-								<PencilSquare onClick={() => setTextFlag(true)}/>
-							</>
-							: <>
-								<Form.Control type="text" value={text} required onChange={e => setText(e.target.value)}/>
-								<Check2Square onClick={user} />
-								<XSquare onClick={() => {
-									setText(user.about);
-									setTextFlag(false);
-								}}/>
-							</>
-						}
-					</p>
-					<p className="profile-row"><a href={`mailto:${user.email}`}>{user.email}</a></p>
-						{user.group && <p className="profile-row">{user.group}</p>}
-						<p><a href="" onClick={logOut} style={{color: "black"}}><BoxArrowLeft/></a></p>
-						
-					</Col>
-					<Col xs={12} md={4}>
-						<p className="profile-row">
-						{!imgFlag 
-							? <>
-								<PencilSquare onClick={() => setImgFlag(true)}/>
-							</>
-							: <>
-								<Form.Control type="text" value={img} required onChange={e => setImg(e.target.value)}/>
-								<Check2Square onClick={img} />
-								<XSquare onClick={() => {
-									setImg(user.avatar);
-									setImgFlag(false);
-								}}/>
-							</>
-						}
-						</p>
-						<Image src={img} alt={name} className="w-100"/>
-					</Col>
-				</Col>	
-			</Row>
-		</Container> */

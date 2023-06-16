@@ -41,12 +41,13 @@ const Footer = () => {
 					<h5 className="">Мы на связи</h5>
 					<Link to="tel:8 (999) 000-00-00" className="d-block link-dark fs-4 fw-bold text-decoration-none">8 (999) 000-00-00</Link>
 					<Link to="mailto:dogfood.ru@gmail.com" className="d-block link-dark text-decoration-none">dogfood.ru@gmail.com</Link>
-						<ul className="d-flex justify-content-center justify-content-sm-center list-unstyled">
-							<li className="py-2"><Link to="#" className="link-dark"><img src={telegram} alt="telegram" className=""/></Link></li>
-							<li className="ms-3 py-2"><Link to="#" className="link-dark"><img src={whatsapp} alt="whatsapp" className=""/></Link></li>
-							<li className="ms-3 py-2"><Link to="#" className="link-dark"><img src={viber} alt="viber" className=""/></Link></li>
-							<li className="ms-3 py-2"><Link to="#" className="link-dark"><img src={instagram} alt="instagram" className=""/></Link></li>
-							<li className="ms-3 py-2"><Link to="#" className="link-dark"><img src={vk} alt="vk" className=""/></Link></li>
+						<ul className="d-flex list-unstyled">
+							<li className="ms-2 py-2"><Link to="#" className="link-dark"><img src={telegram} alt="telegram" className=""/></Link></li>
+							<li className="ms-2 py-2"><Link to="#" className="link-dark"><img src={whatsapp} alt="whatsapp" className=""/></Link></li>
+							<li className="ms-2 py-2"><Link to="#" className="link-dark"><img src={viber} alt="viber" className=""/></Link></li>
+							<li className="ms-2 py-2"><Link to="#" className="link-dark"><img src={instagram} alt="instagram" className=""/></Link></li>
+							<li className="ms-2 py-2"><Link to="#" className="link-dark"><img src={vk} alt="vk" className=""/></Link></li>
+							<li className="ms-2 py-2"><Link to="#" className="link-dark"><img className=""/></Link></li>
 						</ul>
 				</div>
 			</footer>
