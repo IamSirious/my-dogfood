@@ -2,12 +2,11 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Ctx from "../context";
-import UpdatedInput from "../components/UpdatedInput";
-
-import Breadcrumb from "../components/Breadcrumb";
-
 import { Button, Container, Card, Image, ListGroup, Row, Col, Figure } from 'react-bootstrap';
 import { BoxArrowLeft, DoorOpenFill } from "react-bootstrap-icons";
+
+import UpdatedInput from "../components/UpdatedInput";
+import Breadcrumb from "../components/Breadcrumb";
 
 const Profile = ({ setUser }) => {
 	const navigate = useNavigate();

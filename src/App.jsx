@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, createContext} from "react";
 import {Routes, Route} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -13,7 +13,6 @@ import Modal from "./components/Modal";
 import Search from "./components/Search";
 
 // страницы - отдельный компонент со своим набором компонентов
-import Draft from "./pages/Draft";
 import Main from "./pages/Main";
 import Catalog from "./pages/Catalog";
 import Profile from "./pages/Profile";
@@ -156,7 +155,6 @@ const App = () => {
 					/>}/>
 					<Route path="/faq" element={<FAQPage/>}/>
 					<Route path="/contacts" element={<Contacts/>}/>
-					<Route path="/draft" element={<Draft/>}/>
 					<Route path="/profile" element={
 						<Profile user={user} setUser={setUser} color="yellow"/>
 					}/>

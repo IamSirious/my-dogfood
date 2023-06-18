@@ -1,7 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import Rating from "react-rating";
-import './style.css';
 import star from "../../assets/images/star.svg";
 import starfill from "../../assets/images/star-fill.svg";
 
