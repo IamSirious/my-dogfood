@@ -8,8 +8,21 @@ export default createContext({
         Math.floor(Math.random() * (max - min) + min)
     },
     // TODO: создать контекст для корзины, работающий с LS
+    user: {},
+    setUser: () => {},
+    token: "",
+    setToken: () => {},
+    api: {},
+    setApi: () => {},
     goods: [],
     setGoods: () => {},
+    visibleGoods: [],
+    setVisibleGoods: () => {},
+    modalActive: false,
 	searchResult: "",
-	setBaseData: () => {}
+    setModalActive: () => {},
+    favorites: [],
+    setFavorites: () => {},
+    basket: [],
+    setBasket: () =>{}
 });

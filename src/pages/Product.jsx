@@ -13,7 +13,8 @@ import { discountPrice } from '../utils/Utils';
 import Loader from "../components/Loader";
 import BannerOne from "../components/Banners/BannerOne";
 import Breadcrumb from "../components/Breadcrumb";
-import StarRating from '../components/Rating';
+import StarRating from "../components/Rating";
+import Rating from "../components/Rating/Rating";
 import Reviews from "../components/Reviews";
 
 import delivery from "./../assets/images/delivery.svg";
@@ -134,7 +135,6 @@ const Product = () => {
 			})
 	}
 
-
 	const quantityReviewsEnding = () => {
 		if (!!product.reviews) {
 			if (product.reviews.length % 10 === 0) {
@@ -154,6 +154,13 @@ const Product = () => {
 		hiddenElement.scrollIntoView({ behavior: "smooth" });
 	}
 
+    const productRating = (reviews) => {
+        if (!reviews || !reviews.length) {
+            return 0;
+        }
+        const res = reviews.reduce((acc, el) => acc += el.rating, 0);
+        return Math.floor(res / reviews.length)
+    }
 
 	return <>
 		<Container>
@@ -174,7 +181,7 @@ const Product = () => {
 					</div>
 						<div className="rate">
 							<small className="text-muted">Артикул:&nbsp;{product._id}</small>
-							<p><StarRating/>&emsp;
+							<p><Rating rating={productRating(product.reviews)}/>
 							<a href="#reviews" className="text-warning" onClick={handleScrollClick}>{!!product.reviews && product.reviews.length}&nbsp;отзыв{quantityReviewsEnding()}</a></p>
 						</div>
 					<Row>
